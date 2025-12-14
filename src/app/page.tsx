@@ -2,25 +2,41 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
+import AnimatedText from "@/components/AnimatedText";
+import GradientBackground from "@/components/GradientBackground";
+import GlowEffect from "@/components/GlowEffect";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      <GradientBackground />
+      
       {/* Header */}
-      <header className="sticky top-0 z-[100] bg-white border-b border-gray-200 shadow-sm">
+      <header className="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-black">Verbalizelt</div>
+            <motion.div 
+              className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.05 }}
+            >
+              Verbalizelt
+            </motion.div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#service" className="text-black hover:text-yellow-500 transition-colors">Service</a>
-              <a href="#blog" className="text-black hover:text-yellow-500 transition-colors">Blog</a>
-              <a href="#about" className="text-black hover:text-yellow-500 transition-colors">About Us</a>
-              <a href="#contact" className="text-black hover:text-yellow-500 transition-colors">Contact</a>
+              <a href="#service" className="text-black hover:text-yellow-500 transition-colors font-medium">Service</a>
+              <a href="#blog" className="text-black hover:text-yellow-500 transition-colors font-medium">Blog</a>
+              <a href="#about" className="text-black hover:text-yellow-500 transition-colors font-medium">About Us</a>
+              <a href="#contact" className="text-black hover:text-yellow-500 transition-colors font-medium">Contact</a>
             </div>
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg transition-colors">
-              Register
-            </button>
+            <GlowEffect className="group">
+              <Button variant="gradient" size="default">
+                Register
+              </Button>
+            </GlowEffect>
           </div>
         </nav>
       </header>
@@ -29,22 +45,25 @@ export default function Home() {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="flex flex-col gap-12">
           {/* Title and Content */}
-          <AnimatedSection direction="up" className="space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight">
-              We make you learn language easily!
-            </h1>
+          <AnimatedSection direction="up" className="space-y-6 text-center lg:text-left relative z-10">
+            <AnimatedText 
+              text="We make you learn language easily!"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight"
+            />
             <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               We help you learn language easily, with small lessons, you'll earn points and unlock new levels while improving your real world communications.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto lg:mx-0">
-              <input
+              <Input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="flex-1"
               />
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 rounded-lg transition-colors whitespace-nowrap">
-                Get Started
-              </button>
+              <GlowEffect className="group">
+                <Button variant="gradient" size="lg" className="whitespace-nowrap">
+                  Get Started
+                </Button>
+              </GlowEffect>
             </div>
             <div className="flex items-center justify-center lg:justify-start gap-4 pt-4">
               <span className="text-sm text-gray-600">Students Enroll</span>
@@ -64,11 +83,16 @@ export default function Home() {
 
           {/* Phone Mockups */}
           <AnimatedSection direction="up" delay={0.2} className="relative">
-            <div className="bg-yellow-50 rounded-3xl p-8 space-y-8">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+            <div className="bg-gradient-to-br from-yellow-50 via-orange-50 to-yellow-100 rounded-3xl p-8 space-y-8 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.1),transparent_50%)]"></div>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 relative z-10">
                 {/* Left Phone */}
-                <div className="relative">
-                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
+                <motion.div 
+                  className="relative"
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto border-2 border-yellow-200">
                     <div className="bg-gray-100 rounded-2xl h-96 flex items-center justify-center">
                       <div className="text-center space-y-4 p-8">
                         <div className="w-32 h-32 mx-auto bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
@@ -79,11 +103,15 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Right Phone */}
-                <div className="relative">
-                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
+                <motion.div 
+                  className="relative"
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto border-2 border-yellow-200">
                     <div className="bg-gray-50 rounded-2xl h-96 p-4 space-y-4">
                       <div className="flex items-center justify-between mb-4">
                         <div className="text-xs font-semibold">9:27</div>
@@ -135,7 +163,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </AnimatedSection>
@@ -159,61 +187,74 @@ export default function Home() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <AnimatedElement direction="up" index={0} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-black mb-4">Make progress Quickly</h3>
-              <p className="text-gray-700 mb-6">
-                Combining the best of all and language science, lessons are tailored to help you learn at just the right level and place.
-              </p>
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white text-4xl">👩</span>
+            <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200 hover:border-yellow-400 transition-colors">
+              <CardHeader>
+                <CardTitle className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                  Make progress Quickly
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Combining the best of all and language science, lessons are tailored to help you learn at just the right level and place.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="w-24 h-40 mx-auto bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center shadow-lg">
+                      <span className="text-white text-4xl">👩</span>
+                    </div>
+                    <p className="text-sm font-semibold">Learn a new</p>
                   </div>
-                  <p className="text-sm font-semibold">Learn a new</p>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </AnimatedElement>
 
           <AnimatedElement direction="up" index={1} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-black mb-4">Personalized Learning</h3>
-              <p className="text-gray-700 mb-6">
-                Research shows our courses effectively and efficiently teach reading, listening and speaking skills.
-              </p>
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="w-full space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-purple-500"></div>
-                    <span className="text-sm font-semibold">Hello Marrie</span>
-                  </div>
-                  <div className="bg-yellow-400 rounded-lg p-3 text-center">
-                    <div className="text-xl font-bold">75%</div>
-                    <p className="text-xs">Good result!</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="bg-gray-100 rounded p-2 flex items-center gap-2">
-                      <div className="w-6 h-6 bg-blue-500 rounded"></div>
-                      <span className="text-xs">Reading</span>
+            <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200 hover:border-yellow-400 transition-colors">
+              <CardHeader>
+                <CardTitle className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                  Personalized Learning
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Research shows our courses effectively and efficiently teach reading, listening and speaking skills.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
+                  <div className="w-full space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 shadow-md"></div>
+                      <span className="text-sm font-semibold">Hello Marrie</span>
                     </div>
-                    <div className="bg-gray-100 rounded p-2 flex items-center gap-2">
-                      <div className="w-6 h-6 bg-green-500 rounded"></div>
-                      <span className="text-xs">Speaking</span>
+                    <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg p-3 text-center shadow-md">
+                      <div className="text-xl font-bold text-white">75%</div>
+                      <p className="text-xs text-white">Good result!</p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="bg-gray-100 rounded p-2 flex items-center gap-2 hover:bg-gray-200 transition-colors">
+                        <div className="w-6 h-6 bg-blue-500 rounded shadow-sm"></div>
+                        <span className="text-xs">Reading</span>
+                      </div>
+                      <div className="bg-gray-100 rounded p-2 flex items-center gap-2 hover:bg-gray-200 transition-colors">
+                        <div className="w-6 h-6 bg-green-500 rounded shadow-sm"></div>
+                        <span className="text-xs">Speaking</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </AnimatedElement>
         </div>
       </section>
 
       {/* World Map Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative">
         <AnimatedSection direction="fade" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-            Learn a new language the fun way
-          </h2>
+          <AnimatedText 
+            text="Learn a new language the fun way"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4"
+          />
           <p className="text-lg text-gray-700">
             Reach your language goals fast with the world's #1 education app.
           </p>
@@ -258,26 +299,32 @@ export default function Home() {
       </section>
 
       {/* Download Section */}
-      <section className="bg-yellow-400 py-16 lg:py-24">
-        <AnimatedSection direction="up" className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8">
-            Learn a new language for free download app Now!
-          </h2>
+      <section className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 py-16 lg:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+        <AnimatedSection direction="up" className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <AnimatedText 
+            text="Learn a new language for free download app Now!"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8"
+          />
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="text-2xl">🍎</div>
-              <div className="text-left">
-                <div className="text-xs">Download on the</div>
-                <div className="text-sm font-semibold">App Store</div>
-              </div>
-            </div>
-            <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="text-2xl">▶</div>
-              <div className="text-left">
-                <div className="text-xs">Disponible sur</div>
-                <div className="text-sm font-semibold">Google Play</div>
-              </div>
-            </div>
+            <GlowEffect className="group">
+              <Button variant="default" size="lg" className="bg-black text-white hover:bg-gray-800 px-6 py-3 flex items-center gap-3">
+                <div className="text-2xl">🍎</div>
+                <div className="text-left">
+                  <div className="text-xs">Download on the</div>
+                  <div className="text-sm font-semibold">App Store</div>
+                </div>
+              </Button>
+            </GlowEffect>
+            <GlowEffect className="group">
+              <Button variant="default" size="lg" className="bg-black text-white hover:bg-gray-800 px-6 py-3 flex items-center gap-3">
+                <div className="text-2xl">▶</div>
+                <div className="text-left">
+                  <div className="text-xs">Disponible sur</div>
+                  <div className="text-sm font-semibold">Google Play</div>
+                </div>
+              </Button>
+            </GlowEffect>
           </div>
         </AnimatedSection>
       </section>
