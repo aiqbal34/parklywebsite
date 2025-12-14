@@ -211,8 +211,8 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-4">Legal</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Terms & Conditions</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Privacy Policy</a></li>
+                  <li><a href="/terms-of-service" className="text-gray-300 hover:text-blue-500 transition-colors">Terms of Service</a></li>
+                  <li><a href="/privacy-policy" className="text-gray-300 hover:text-blue-500 transition-colors">Privacy Policy</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Become a Partner</a></li>
                 </ul>
               </div>
@@ -221,16 +221,20 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-4">Social</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Twitter</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Facebook</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Instagram</a></li>
+                  <li><a href="https://www.linkedin.com/company/useparkly/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-500 transition-colors">LinkedIn</a></li>
+                  <li><a href="https://www.instagram.com/use.parkly?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-500 transition-colors">Instagram</a></li>
+                  <li><a href="https://www.tiktok.com/@useparkly.com?_r=1&_t=ZT-92CxQ0iXIXv" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-500 transition-colors">TikTok</a></li>
                 </ul>
               </div>
             </AnimatedElement>
           </div>
           <div className="border-t border-gray-800 pt-8">
             <AnimatedSection direction="fade" className="text-center text-sm text-gray-400">
-              <p>Privacy Policy | Terms & Conditions | Cookies Policy</p>
+              <p>
+                <a href="/privacy-policy" className="hover:text-blue-500 transition-colors">Privacy Policy</a> |{" "}
+                <a href="/terms-of-service" className="hover:text-blue-500 transition-colors">Terms of Service</a> |{" "}
+                <a href="#" className="hover:text-blue-500 transition-colors">Cookies Policy</a>
+              </p>
             </AnimatedSection>
           </div>
         </div>
