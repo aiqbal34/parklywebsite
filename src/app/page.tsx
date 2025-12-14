@@ -188,7 +188,7 @@ export default function Home() {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4">UseparklyLLC</h3>
                 <p className="text-gray-300 text-sm">
-                  Useparkly LLC is a two way platform which allows Rentees to list their own driveway/company lot for parking and/or allows Renters to find cheaper, more time efficient ways to park.
+                  Useparkly LLC is a two-way marketplace connecting property owners and drivers. Owners can monetize their driveways and parking spaces, while drivers discover affordable and convenient parking solutions.
                 </p>
               </div>
             </AnimatedElement>
