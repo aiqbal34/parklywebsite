@@ -6,19 +6,18 @@ import AnimatedElement from "@/components/AnimatedElement";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="sticky top-0 z-[100] bg-white border-b border-gray-200 shadow-sm">
+      <header className="sticky top-0 z-[100] bg-black border-b border-gray-800 shadow-sm">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-black">Parkly</div>
+            <div className="text-2xl font-bold text-white">Parkly</div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#service" className="text-black hover:text-yellow-500 transition-colors">Service</a>
-              <a href="#about" className="text-black hover:text-yellow-500 transition-colors">About Us</a>
-              <a href="#contact" className="text-black hover:text-yellow-500 transition-colors">Contact</a>
-              <a href="#demo" className="text-black hover:text-yellow-500 transition-colors">Demo</a>
+              <a href="#about" className="text-white hover:text-blue-500 transition-colors">About Us</a>
+              <a href="#demo" className="text-white hover:text-blue-500 transition-colors">Demo</a>
+              <a href="#contact" className="text-white hover:text-blue-500 transition-colors">Contact</a>
             </div>
-            <a href="#download" className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg transition-colors">
+            <a href="#download" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition-colors">
               Download App
             </a>
           </div>
@@ -30,27 +29,27 @@ export default function Home() {
         <div className="flex flex-col gap-12">
           {/* Title and Content */}
           <AnimatedSection direction="up" className="space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Turn your driveway into a side hustle
             </h1>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               An easier and cheaper alternative to parking whilst making some easy cash
             </p>
           </AnimatedSection>
 
           {/* Image Placeholders */}
           <AnimatedSection direction="up" delay={0.2} className="relative">
-            <div className="bg-yellow-50 rounded-3xl p-8 space-y-8">
+            <div className="bg-blue-950 rounded-3xl p-8 space-y-8">
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                 {/* Placeholder Image 1 */}
                 <div className="relative">
-                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
-                    <div className="bg-gray-100 rounded-2xl h-96 flex items-center justify-center">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
+                    <div className="bg-gray-800 rounded-2xl h-96 flex items-center justify-center">
                       <div className="text-center space-y-4 p-8">
-                        <div className="w-32 h-32 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-500 text-2xl">Image Placeholder</span>
+                        <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
+                          <span className="text-gray-400 text-2xl">Image Placeholder</span>
                         </div>
-                        <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
+                        <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
                       </div>
                     </div>
                   </div>
@@ -58,13 +57,13 @@ export default function Home() {
 
                 {/* Placeholder Image 2 */}
                 <div className="relative">
-                  <div className="bg-white rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
-                    <div className="bg-gray-100 rounded-2xl h-96 flex items-center justify-center">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
+                    <div className="bg-gray-800 rounded-2xl h-96 flex items-center justify-center">
                       <div className="text-center space-y-4 p-8">
-                        <div className="w-32 h-32 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-500 text-2xl">Image Placeholder</span>
+                        <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
+                          <span className="text-gray-400 text-2xl">Image Placeholder</span>
                         </div>
-                        <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
+                        <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
                       </div>
                     </div>
                   </div>
@@ -75,106 +74,70 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Service Section */}
-      <section id="service" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-white">
-        <AnimatedSection direction="up" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-            Service
-          </h2>
-        </AnimatedSection>
-        <div className="grid md:grid-cols-2 gap-8">
-          <AnimatedElement direction="up" index={0} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Image Placeholder</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-
-          <AnimatedElement direction="up" index={1} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Image Placeholder</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-        </div>
-      </section>
-
       {/* About Us Section */}
-      <section id="about" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <section id="about" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             About Us
           </h2>
         </AnimatedSection>
         <AnimatedSection direction="up">
-          <div className="bg-gray-100 rounded-2xl p-8 lg:p-16 h-96 flex items-center justify-center">
+          <div className="bg-gray-900 rounded-2xl p-8 lg:p-16 h-96 flex items-center justify-center">
             <div className="text-center">
-              <div className="w-32 h-32 mx-auto bg-gray-300 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-gray-500 text-sm">Image Placeholder</span>
+              <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-gray-400 text-sm">Image Placeholder</span>
               </div>
-              <p className="text-gray-600">Image will be provided later</p>
+              <p className="text-gray-300">Image will be provided later</p>
             </div>
           </div>
         </AnimatedSection>
       </section>
 
       {/* Demo Section */}
-      <section id="demo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <section id="demo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Demo
           </h2>
         </AnimatedSection>
         <div className="grid md:grid-cols-3 gap-8">
           <AnimatedElement direction="up" index={0} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-black mb-4 text-center">Heading</h3>
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
+            <div className="bg-blue-950 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
+              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Image 1</span>
+                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Image 1</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
+                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
                 </div>
               </div>
             </div>
           </AnimatedElement>
 
           <AnimatedElement direction="up" index={1} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-black mb-4 text-center">Heading</h3>
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
+            <div className="bg-blue-950 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
+              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Image 2</span>
+                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Image 2</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
+                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
                 </div>
               </div>
             </div>
           </AnimatedElement>
 
           <AnimatedElement direction="up" index={2} stagger={0.2}>
-            <div className="bg-yellow-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-black mb-4 text-center">Heading</h3>
-              <div className="bg-white rounded-xl p-4 h-64 flex items-center justify-center">
+            <div className="bg-blue-950 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
+              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Image 3</span>
+                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Image 3</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-600">Image will be provided later</p>
+                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
                 </div>
               </div>
             </div>
@@ -183,19 +146,25 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <section id="contact" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Contact
           </h2>
         </AnimatedSection>
-        {/* Contact section content can be added here */}
+        <AnimatedSection direction="up" className="text-center">
+          <p className="text-lg text-gray-300">
+            <a href="mailto:team@useparkly.com" className="text-blue-500 hover:text-blue-400 transition-colors">
+              team@useparkly.com
+            </a>
+          </p>
+        </AnimatedSection>
       </section>
 
       {/* Download Section */}
-      <section id="download" className="bg-yellow-400 py-16 lg:py-24">
+      <section id="download" className="bg-blue-500 py-16 lg:py-24">
         <AnimatedSection direction="up" className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
             Ready to save time, download here.
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -218,50 +187,50 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white py-12 lg:py-16">
+      <footer className="bg-black py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <AnimatedElement direction="up" index={0} stagger={0.1}>
               <div>
-                <h3 className="text-2xl font-bold text-black mb-4">UseparklyLLC</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="text-2xl font-bold text-white mb-4">UseparklyLLC</h3>
+                <p className="text-gray-300 text-sm">
                   Useparkly LLC is a two way platform which allows Rentees to list their own driveway/company lot for parking and/or allows Renters to find cheaper, more time efficient ways to park.
                 </p>
               </div>
             </AnimatedElement>
             <AnimatedElement direction="up" index={1} stagger={0.1}>
               <div>
-                <h4 className="font-semibold text-black mb-4">Links</h4>
+                <h4 className="font-semibold text-white mb-4">Links</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">About Us</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Service</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Blog</a></li>
+                  <li><a href="#about" className="text-gray-300 hover:text-blue-500 transition-colors">About Us</a></li>
+                  <li><a href="#demo" className="text-gray-300 hover:text-blue-500 transition-colors">Demo</a></li>
+                  <li><a href="#contact" className="text-gray-300 hover:text-blue-500 transition-colors">Contact</a></li>
                 </ul>
               </div>
             </AnimatedElement>
             <AnimatedElement direction="up" index={2} stagger={0.1}>
               <div>
-                <h4 className="font-semibold text-black mb-4">Legal</h4>
+                <h4 className="font-semibold text-white mb-4">Legal</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Terms & Conditions</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Become a Partner</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Terms & Conditions</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Become a Partner</a></li>
                 </ul>
               </div>
             </AnimatedElement>
             <AnimatedElement direction="up" index={3} stagger={0.1}>
               <div>
-                <h4 className="font-semibold text-black mb-4">Social</h4>
+                <h4 className="font-semibold text-white mb-4">Social</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Twitter</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Facebook</a></li>
-                  <li><a href="#" className="text-gray-600 hover:text-yellow-500 transition-colors">Instagram</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Twitter</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Facebook</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-500 transition-colors">Instagram</a></li>
                 </ul>
               </div>
             </AnimatedElement>
           </div>
-          <div className="border-t border-gray-200 pt-8">
-            <AnimatedSection direction="fade" className="text-center text-sm text-gray-600">
+          <div className="border-t border-gray-800 pt-8">
+            <AnimatedSection direction="fade" className="text-center text-sm text-gray-400">
               <p>Privacy Policy | Terms & Conditions | Cookies Policy</p>
             </AnimatedSection>
           </div>
