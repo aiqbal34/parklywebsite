@@ -76,12 +76,17 @@ export default function Home() {
           </h2>
         </AnimatedSection>
         <AnimatedSection direction="up">
-          <div className="bg-gray-900 rounded-2xl p-8 lg:p-16 h-96 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-gray-400 text-sm">Image Placeholder</span>
-              </div>
-              <p className="text-gray-300">Image will be provided later</p>
+          <div className="bg-gray-900 rounded-2xl p-8 lg:p-16">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Growing up just 15 minutes away from Levi's Stadium, Sohaib, Azfar, and Aariz were huge 49ers fans. But attending games was always a hassle—hours of traffic followed by searching for extremely overpriced parking.
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                We knew there had to be a better way. We noticed the empty driveways of nearby neighbors and started thinking: what if there was a cheaper way to find parking while people nearby could earn some extra cash? It's a win-win situation.
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                From there, Parkly was born.
+              </p>
             </div>
           </div>
         </AnimatedSection>
