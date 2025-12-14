@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Verbalizelt - Learn a New Language the Fun Way",
-  description: "We help you learn language easily, with small lessons, you'll earn points and unlock new levels while improving your real world communications.",
+  title: "Parkly - Turn your driveway into a side hustle",
+  description: "An easier and cheaper alternative to parking whilst making some easy cash",
 };
 
 export default function RootLayout({
