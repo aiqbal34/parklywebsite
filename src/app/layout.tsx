@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Parkly - Turn your driveway into a side hustle",
   description: "An easier and cheaper alternative to parking whilst making some easy cash",
 };
+// Force redeploy
 
 export default function RootLayout({
   children,

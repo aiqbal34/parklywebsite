@@ -1,2 +1,16 @@
-{}
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "useparkly.com"
+        }
+      ],
+      "destination": "https://www.useparkly.com/$1",
+      "permanent": true
+    }
+  ]
+}
 
