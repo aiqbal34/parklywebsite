@@ -37,35 +37,29 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          {/* Image Placeholders */}
+          {/* Hero Images */}
           <AnimatedSection direction="up" delay={0.2} className="relative">
             <div className="bg-blue-950 rounded-3xl p-8 space-y-8">
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                {/* Placeholder Image 1 */}
-                <div className="relative">
-                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
-                    <div className="bg-gray-800 rounded-2xl h-96 flex items-center justify-center">
-                      <div className="text-center space-y-4 p-8">
-                        <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-400 text-2xl">Image Placeholder</span>
-                        </div>
-                        <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
-                      </div>
-                    </div>
+                {/* Image 1 - Driver with Navigation */}
+                <div className="relative w-full max-w-xs">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
+                    <img
+                      src="/parker.png"
+                      alt="Driver using navigation app to find parking"
+                      className="w-full h-96 object-cover rounded-2xl"
+                    />
                   </div>
                 </div>
 
-                {/* Placeholder Image 2 */}
-                <div className="relative">
-                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 max-w-xs mx-auto">
-                    <div className="bg-gray-800 rounded-2xl h-96 flex items-center justify-center">
-                      <div className="text-center space-y-4 p-8">
-                        <div className="w-32 h-32 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-400 text-2xl">Image Placeholder</span>
-                        </div>
-                        <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
-                      </div>
-                    </div>
+                {/* Image 2 - Woman Listing Parking Spot */}
+                <div className="relative w-full max-w-xs">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
+                    <img
+                      src="/peter.png"
+                      alt="Woman listing parking spot on her driveway"
+                      className="w-full h-96 object-cover rounded-2xl"
+                    />
                   </div>
                 </div>
               </div>
