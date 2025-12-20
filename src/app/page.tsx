@@ -2,9 +2,44 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
+import { useState } from "react";
 // Updated for Parkly
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage("Thank you! We'll send you a download link soon.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setMessage("Failed to submit. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black">
       {/* Header */}
@@ -163,25 +198,41 @@ export default function Home() {
       {/* Download Section */}
       <section id="download" className="bg-blue-500 py-16 lg:py-24">
         <AnimatedSection direction="up" className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
-            Ready to save time, download here.
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Coming Soon
           </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="text-2xl">🍎</div>
-              <div className="text-left">
-                <div className="text-xs">Download on the</div>
-                <div className="text-sm font-semibold">App Store</div>
-              </div>
+          <p className="text-lg md:text-xl text-blue-50 mb-8 max-w-2xl mx-auto">
+            Enter your email address and we'll send you a download link as soon as the app is ready!
+          </p>
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                disabled={status === "loading"}
+                className="flex-1 px-4 py-3 rounded-lg border-2 border-white bg-white/90 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:bg-white w-full disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors whitespace-nowrap w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "loading" ? "Sending..." : "Send"}
+              </button>
             </div>
-            <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="text-2xl">▶</div>
-              <div className="text-left">
-                <div className="text-xs">Disponible sur</div>
-                <div className="text-sm font-semibold">Google Play</div>
-              </div>
-            </div>
-          </div>
+            {message && (
+              <p
+                className={`mt-4 text-center text-sm ${
+                  status === "success" ? "text-green-200" : "text-red-200"
+                }`}
+              >
+                {message}
+              </p>
+            )}
+          </form>
         </AnimatedSection>
       </section>
 
