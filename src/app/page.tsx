@@ -79,7 +79,7 @@ export default function Home() {
           <div className="bg-gray-900 rounded-2xl p-8 lg:p-16">
             <div className="max-w-3xl mx-auto">
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Growing up just 15 minutes away from Levi's Stadium, Sohaib, Azfar, and Aariz were huge 49ers fans. But attending games was always a hassle—hours of traffic followed by searching for extremely overpriced parking.
+                Growing up just 15 minutes away from Levi's Stadium, Sohaib, Azfar, and Aariz were huge 49ers fans. But attending games was always a hassle with hours of traffic followed by searching for extremely overpriced parking.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 We knew there had to be a better way. We noticed the empty driveways of nearby neighbors and started thinking: what if there was a cheaper way to find parking while people nearby could earn some extra cash? It's a win-win situation.
