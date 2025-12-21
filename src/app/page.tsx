@@ -2,7 +2,7 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // Updated for Parkly
 
@@ -34,6 +34,14 @@ export default function Home() {
     setDirection(index > currentImageIndex ? 1 : -1);
     setCurrentImageIndex(index);
   };
+
+  // Preload all images
+  useEffect(() => {
+    carouselImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -214,7 +222,7 @@ export default function Home() {
               <div className="relative bg-gray-900 rounded-2xl overflow-hidden">
                 {/* Image */}
                 <div className="relative aspect-video flex items-center justify-center overflow-hidden">
-                  <AnimatePresence mode="wait" custom={direction}>
+                  <AnimatePresence initial={false} custom={direction}>
                     <motion.img
                       key={currentImageIndex}
                       src={carouselImages[currentImageIndex]}
@@ -225,8 +233,8 @@ export default function Home() {
                       animate="center"
                       exit="exit"
                       transition={{
-                        x: { type: "spring", stiffness: 300, damping: 30 },
-                        opacity: { duration: 0.2 },
+                        x: { type: "spring", stiffness: 500, damping: 40, mass: 0.5 },
+                        opacity: { duration: 0.1 },
                       }}
                       className="w-full h-full object-contain absolute inset-0"
                     />
