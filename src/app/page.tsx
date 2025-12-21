@@ -79,35 +79,48 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          {/* Hero Images */}
+          {/* Hero Video - Parker POV */}
           <AnimatedSection direction="up" delay={0.2} className="relative">
-            <div className="bg-blue-950 rounded-3xl p-8 space-y-8">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                {/* Image 1 - Driver with Navigation */}
-                <div className="relative w-full max-w-xs">
+            <div className="bg-blue-950 rounded-3xl p-8">
+              <div className="flex items-center justify-center">
+                <div className="relative w-full max-w-4xl">
                   <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
-                    <img
-                      src="/parker.png"
-                      alt="Driver using navigation app to find parking"
-                      className="w-full h-96 object-cover rounded-2xl"
-                    />
-                  </div>
-                </div>
-
-                {/* Image 2 - Woman Listing Parking Spot */}
-                <div className="relative w-full max-w-xs">
-                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
-                    <img
-                      src="/peter.png"
-                      alt="Woman listing parking spot on her driveway"
-                      className="w-full h-96 object-cover rounded-2xl"
-                    />
+                    <video
+                      src="/parker_pov.MOV"
+                      controls
+                      className="w-full h-auto rounded-2xl"
+                      playsInline
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                 </div>
               </div>
             </div>
           </AnimatedSection>
         </div>
+      </section>
+
+      {/* Peter POV Video Section */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
+        <AnimatedSection direction="up" className="relative">
+          <div className="bg-blue-950 rounded-3xl p-8">
+            <div className="flex items-center justify-center">
+              <div className="relative w-full max-w-4xl">
+                <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
+                  <video
+                    src="/peter_pov.MOV"
+                    controls
+                    className="w-full h-auto rounded-2xl"
+                    playsInline
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
       </section>
 
       {/* About Us Section */}
@@ -300,3 +313,4 @@ export default function Home() {
     </div>
   );
 }
+
