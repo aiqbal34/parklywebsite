@@ -72,10 +72,10 @@ export default function Home() {
           {/* Title and Content */}
           <AnimatedSection direction="up" className="space-y-6 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Turn your driveway into a side hustle
+              Your Friendly Neighborhood Parking Spot!
             </h1>
             <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              An easier and cheaper alternative to parking whilst making some easy cash
+              An easier and cheaper alternative to parking while making some easy cash
             </p>
           </AnimatedSection>
 

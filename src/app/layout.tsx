@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parkly - Turn your driveway into a side hustle",
+  title: "Parkly - Your Friendly neighborhood parking spot!",
   description: "An easier and cheaper alternative to parking whilst making some easy cash",
   icons: {
     icon: [
