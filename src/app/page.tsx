@@ -2,7 +2,7 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // Updated for Parkly
 
@@ -43,9 +43,49 @@ export default function Home() {
     });
   }, []);
 
+  // Video refs for autoplay on scroll
+  const parkerVideoRef = useRef<HTMLVideoElement>(null);
+  const peterVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Autoplay videos when they come into view
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // Play when 50% of video is visible
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          video.play().catch((error) => {
+            // Autoplay was prevented, which is fine
+            console.log("Autoplay prevented:", error);
+          });
+        } else {
+          video.pause();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    if (parkerVideoRef.current) {
+      observer.observe(parkerVideoRef.current);
+    }
+    if (peterVideoRef.current) {
+      observer.observe(peterVideoRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
     center: {
@@ -55,7 +95,7 @@ export default function Home() {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
     }),
   };
@@ -136,10 +176,13 @@ export default function Home() {
                 <div className="relative w-full max-w-4xl">
                   <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
                     <video
+                      ref={parkerVideoRef}
                       src="/parker_pov.MOV"
                       controls
                       className="w-full h-auto rounded-2xl"
                       playsInline
+                      muted
+                      loop
                     >
                       Your browser does not support the video tag.
                     </video>
@@ -158,14 +201,17 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-4xl">
                 <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
-                  <video
-                    src="/peter_pov.MOV"
-                    controls
-                    className="w-full h-auto rounded-2xl"
-                    playsInline
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                    <video
+                      ref={peterVideoRef}
+                      src="/peter_pov.MOV"
+                      controls
+                      className="w-full h-auto rounded-2xl"
+                      playsInline
+                      muted
+                      loop
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                 </div>
               </div>
             </div>
@@ -215,40 +261,63 @@ export default function Home() {
       </section>
 
       {/* Carousel Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 bg-black">
         <AnimatedSection direction="up" className="relative">
-          <div className="max-w-5xl mx-auto">
-            <div className="relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-4 shadow-2xl">
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden">
-                {/* Image */}
-                <div className="relative aspect-video flex items-center justify-center overflow-hidden">
-                  <AnimatePresence initial={false} custom={direction}>
-                    <motion.img
-                      key={currentImageIndex}
-                      src={carouselImages[currentImageIndex]}
-                      alt={`Carousel image ${currentImageIndex + 1}`}
-                      custom={direction}
-                      variants={slideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{
-                        x: { type: "spring", stiffness: 500, damping: 40, mass: 0.5 },
-                        opacity: { duration: 0.1 },
-                      }}
-                      className="w-full h-full object-contain absolute inset-0"
-                    />
-                  </AnimatePresence>
+          <div className="bg-blue-950 rounded-2xl sm:rounded-3xl p-4 sm:p-8">
+            <div className="flex items-center justify-center">
+              <div className="relative w-full max-w-4xl">
+                <div className="bg-gray-900 rounded-xl sm:rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden relative">
+                  {/* Image Container */}
+                  <div className="relative w-full aspect-video">
+                    <AnimatePresence initial={false} custom={direction}>
+                      <motion.div
+                        key={currentImageIndex}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                          x: { type: "spring", stiffness: 600, damping: 50, mass: 0.3 },
+                          opacity: { duration: 0.15 },
+                        }}
+                        className="absolute inset-0 flex items-center justify-center"
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.2}
+                        onDragEnd={(e, { offset, velocity }) => {
+                          const swipeThreshold = 50;
+                          const velocityThreshold = 500;
+                          
+                          // Swipe left (negative offset) = next image
+                          if (offset.x < -swipeThreshold || velocity.x < -velocityThreshold) {
+                            nextImage();
+                          }
+                          // Swipe right (positive offset) = previous image
+                          else if (offset.x > swipeThreshold || velocity.x > velocityThreshold) {
+                            prevImage();
+                          }
+                        }}
+                      >
+                        <img
+                          src={carouselImages[currentImageIndex]}
+                          alt={`Carousel image ${currentImageIndex + 1}`}
+                          className="w-full h-full object-contain rounded-xl sm:rounded-2xl pointer-events-none"
+                          draggable={false}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
                   
                   {/* Left Arrow */}
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full transition-all duration-300 z-10 hover:scale-110"
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 active:bg-black/90 text-white p-2 sm:p-3 rounded-full transition-all duration-300 z-20 hover:scale-110 active:scale-95 touch-manipulation"
                     aria-label="Previous image"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-4 w-4 sm:h-6 sm:w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -260,12 +329,12 @@ export default function Home() {
                   {/* Right Arrow */}
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full transition-all duration-300 z-10 hover:scale-110"
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 active:bg-black/90 text-white p-2 sm:p-3 rounded-full transition-all duration-300 z-20 hover:scale-110 active:scale-95 touch-manipulation"
                     aria-label="Next image"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-4 w-4 sm:h-6 sm:w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -276,15 +345,15 @@ export default function Home() {
                 </div>
 
                 {/* Dots Indicator */}
-                <div className="flex justify-center gap-2 p-4">
+                <div className="flex justify-center gap-2 p-3 sm:p-4">
                   {carouselImages.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => goToImage(index)}
-                      className={`h-2 rounded-full transition-all duration-300 ${
+                      className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 touch-manipulation ${
                         index === currentImageIndex
-                          ? "w-8 bg-blue-500"
-                          : "w-2 bg-gray-600 hover:bg-gray-500"
+                          ? "w-6 sm:w-8 bg-blue-500"
+                          : "w-1.5 sm:w-2 bg-gray-600 hover:bg-gray-500 active:bg-gray-500"
                       }`}
                       aria-label={`Go to image ${index + 1}`}
                     />
