@@ -3,12 +3,54 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 // Updated for Parkly
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  
+  const carouselImages = [
+    "/Carasoul_1.PNG",
+    "/Carasoul_2.PNG",
+    "/Carasoul_3.PNG",
+    "/Carasoul_4.PNG",
+  ];
+
+  const nextImage = () => {
+    setDirection(1);
+    setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevImage = () => {
+    setDirection(-1);
+    setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  const goToImage = (index: number) => {
+    setDirection(index > currentImageIndex ? 1 : -1);
+    setCurrentImageIndex(index);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -164,6 +206,88 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Carousel Section */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
+        <AnimatedSection direction="up" className="relative">
+          <div className="max-w-5xl mx-auto">
+            <div className="relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-4 shadow-2xl">
+              <div className="relative bg-gray-900 rounded-2xl overflow-hidden">
+                {/* Image */}
+                <div className="relative aspect-video flex items-center justify-center overflow-hidden">
+                  <AnimatePresence mode="wait" custom={direction}>
+                    <motion.img
+                      key={currentImageIndex}
+                      src={carouselImages[currentImageIndex]}
+                      alt={`Carousel image ${currentImageIndex + 1}`}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{
+                        x: { type: "spring", stiffness: 300, damping: 30 },
+                        opacity: { duration: 0.2 },
+                      }}
+                      className="w-full h-full object-contain absolute inset-0"
+                    />
+                  </AnimatePresence>
+                  
+                  {/* Left Arrow */}
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full transition-all duration-300 z-10 hover:scale-110"
+                    aria-label="Previous image"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Right Arrow */}
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full transition-all duration-300 z-10 hover:scale-110"
+                    aria-label="Next image"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Dots Indicator */}
+                <div className="flex justify-center gap-2 p-4">
+                  {carouselImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToImage(index)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex
+                          ? "w-8 bg-blue-500"
+                          : "w-2 bg-gray-600 hover:bg-gray-500"
+                      }`}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
       {/* About Us Section */}
       <section id="about" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="text-center mb-12">
@@ -195,7 +319,12 @@ export default function Home() {
             Contact
           </h2>
         </AnimatedSection>
-        <AnimatedSection direction="up" className="text-center">
+        <AnimatedSection direction="up" className="text-center space-y-4">
+          <p className="text-lg text-gray-300">
+            <a href="tel:+14086596839" className="text-blue-500 hover:text-blue-400 transition-colors">
+              (408) 659-6839
+            </a>
+          </p>
           <p className="text-lg text-gray-300">
             <a href="mailto:team@useparkly.com" className="text-blue-500 hover:text-blue-400 transition-colors">
               team@useparkly.com
