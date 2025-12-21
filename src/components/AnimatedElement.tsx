@@ -8,7 +8,7 @@ interface AnimatedElementProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "fade";
+  direction?: "up" | "down" | "left" | "right" | "fade" | "pop";
   stagger?: number;
   index?: number;
 }
@@ -45,6 +45,14 @@ export default function AnimatedElement({
       hidden: { opacity: 0, x: 30 },
       visible: { opacity: 1, x: 0 },
     },
+    pop: {
+      hidden: { opacity: 0, scale: 0.5, y: 50 },
+      visible: { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0,
+      },
+    },
   };
 
   return (
@@ -53,7 +61,14 @@ export default function AnimatedElement({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={variants[direction]}
-      transition={{ duration: 0.5, delay: delay + index * stagger }}
+      transition={direction === "pop" 
+        ? { 
+            type: "spring" as const,
+            stiffness: 200,
+            damping: 15,
+            delay: delay + index * stagger 
+          }
+        : { duration: 0.5, delay: delay + index * stagger }}
       className={className}
     >
       {children}

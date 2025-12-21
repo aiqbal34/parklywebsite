@@ -123,6 +123,47 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
+      {/* Demo Section */}
+      <section id="demo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
+        <div className="grid md:grid-cols-3 gap-8">
+          <AnimatedElement direction="pop" index={0} stagger={0.15}>
+            <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
+                  Practical
+                </h3>
+                <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </AnimatedElement>
+
+          <AnimatedElement direction="pop" index={1} stagger={0.15}>
+            <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
+                  Convenient
+                </h3>
+                <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </AnimatedElement>
+
+          <AnimatedElement direction="pop" index={2} stagger={0.15}>
+            <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
+                  Efficient
+                </h3>
+                <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
+
       {/* About Us Section */}
       <section id="about" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="text-center mb-12">
@@ -145,58 +186,6 @@ export default function Home() {
             </div>
           </div>
         </AnimatedSection>
-      </section>
-
-      {/* Demo Section */}
-      <section id="demo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
-        <AnimatedSection direction="up" className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Demo
-          </h2>
-        </AnimatedSection>
-        <div className="grid md:grid-cols-3 gap-8">
-          <AnimatedElement direction="up" index={0} stagger={0.2}>
-            <div className="bg-blue-950 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
-              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Image 1</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-
-          <AnimatedElement direction="up" index={1} stagger={0.2}>
-            <div className="bg-blue-950 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
-              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Image 2</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-
-          <AnimatedElement direction="up" index={2} stagger={0.2}>
-            <div className="bg-blue-950 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">Heading</h3>
-              <div className="bg-gray-900 rounded-xl p-4 h-64 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-40 mx-auto bg-gray-700 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Image 3</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-300">Image will be provided later</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-        </div>
       </section>
 
       {/* Contact Section */}
