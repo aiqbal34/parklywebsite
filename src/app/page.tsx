@@ -46,7 +46,14 @@ export default function Home() {
       <header className="sticky top-0 z-[100] bg-black border-b border-gray-800 shadow-sm">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-white">Parkly</div>
+            <div className="flex items-center gap-0">
+              <img 
+                src="/parkly_logo.png" 
+                alt="Parkly Logo" 
+                className="h-10 w-auto"
+              />
+              <div className="text-3xl font-bold text-white">Parkly</div>
+            </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#about" className="text-white hover:text-blue-500 transition-colors">About Us</a>
               <a href="#demo" className="text-white hover:text-blue-500 transition-colors">Demo</a>
