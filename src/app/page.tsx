@@ -3,45 +3,12 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 // Updated for Parkly
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  
-  const carouselImages = [
-    "/Carasoul_1.PNG",
-    "/Carasoul_2.PNG",
-    "/Carasoul_3.PNG",
-    "/Carasoul_4.PNG",
-  ];
-
-  const nextImage = () => {
-    setDirection(1);
-    setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-  };
-
-  const prevImage = () => {
-    setDirection(-1);
-    setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
-
-  const goToImage = (index: number) => {
-    setDirection(index > currentImageIndex ? 1 : -1);
-    setCurrentImageIndex(index);
-  };
-
-  // Preload all images
-  useEffect(() => {
-    carouselImages.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
 
   // Video refs for autoplay on scroll
   const parkerVideoRef = useRef<HTMLVideoElement>(null);
@@ -171,15 +138,15 @@ export default function Home() {
 
           {/* Hero Video - Parker POV */}
           <AnimatedSection direction="up" delay={0.2} className="relative">
-            <div className="bg-blue-950 rounded-3xl p-8">
+            <div className="bg-blue-950 rounded-3xl p-4 sm:p-8">
               <div className="flex items-center justify-center">
                 <div className="relative w-full max-w-4xl">
-                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden">
                     <video
                       ref={parkerVideoRef}
                       src="/parker_pov.MOV"
                       controls
-                      className="w-full h-auto rounded-2xl"
+                      className="w-full h-auto max-h-[70vh] rounded-2xl object-contain"
                       playsInline
                       muted
                       loop
@@ -197,21 +164,21 @@ export default function Home() {
       {/* Peter POV Video Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 bg-black">
         <AnimatedSection direction="up" className="relative">
-          <div className="bg-blue-950 rounded-3xl p-8">
+          <div className="bg-blue-950 rounded-3xl p-4 sm:p-8">
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-4xl">
-                <div className="bg-gray-900 rounded-3xl shadow-2xl p-4 overflow-hidden">
-                    <video
-                      ref={peterVideoRef}
-                      src="/peter_pov.MOV"
-                      controls
-                      className="w-full h-auto rounded-2xl"
-                      playsInline
-                      muted
-                      loop
-                    >
-                      Your browser does not support the video tag.
-                    </video>
+                <div className="bg-gray-900 rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden">
+                  <video
+                    ref={peterVideoRef}
+                    src="/peter_pov.MOV"
+                    controls
+                    className="w-full h-auto max-h-[70vh] rounded-2xl object-contain"
+                    playsInline
+                    muted
+                    loop
+                  >
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
@@ -260,107 +227,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Carousel Section */}
+      {/* Images Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 bg-black">
         <AnimatedSection direction="up" className="relative">
-          <div className="bg-blue-950 rounded-2xl sm:rounded-3xl p-4 sm:p-8">
-            <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-4xl">
-                <div className="bg-gray-900 rounded-xl sm:rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden relative">
-                  {/* Image Container */}
-                  <div className="relative w-full aspect-video">
-                    <AnimatePresence initial={false} custom={direction}>
-                      <motion.div
-                        key={currentImageIndex}
-                        custom={direction}
-                        variants={slideVariants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{
-                          x: { type: "spring", stiffness: 600, damping: 50, mass: 0.3 },
-                          opacity: { duration: 0.15 },
-                        }}
-                        className="absolute inset-0 flex items-center justify-center"
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.2}
-                        onDragEnd={(e, { offset, velocity }) => {
-                          const swipeThreshold = 50;
-                          const velocityThreshold = 500;
-                          
-                          // Swipe left (negative offset) = next image
-                          if (offset.x < -swipeThreshold || velocity.x < -velocityThreshold) {
-                            nextImage();
-                          }
-                          // Swipe right (positive offset) = previous image
-                          else if (offset.x > swipeThreshold || velocity.x > velocityThreshold) {
-                            prevImage();
-                          }
-                        }}
-                      >
-                        <img
-                          src={carouselImages[currentImageIndex]}
-                          alt={`Carousel image ${currentImageIndex + 1}`}
-                          className="w-full h-full object-contain rounded-xl sm:rounded-2xl pointer-events-none"
-                          draggable={false}
-                        />
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                  
-                  {/* Left Arrow */}
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 active:bg-black/90 text-white p-2 sm:p-3 rounded-full transition-all duration-300 z-20 hover:scale-110 active:scale-95 touch-manipulation"
-                    aria-label="Previous image"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 sm:h-6 sm:w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-
-                  {/* Right Arrow */}
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 active:bg-black/90 text-white p-2 sm:p-3 rounded-full transition-all duration-300 z-20 hover:scale-110 active:scale-95 touch-manipulation"
-                    aria-label="Next image"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 sm:h-6 sm:w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Dots Indicator */}
-                <div className="flex justify-center gap-2 p-3 sm:p-4">
-                  {carouselImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToImage(index)}
-                      className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 touch-manipulation ${
-                        index === currentImageIndex
-                          ? "w-6 sm:w-8 bg-blue-500"
-                          : "w-1.5 sm:w-2 bg-gray-600 hover:bg-gray-500 active:bg-gray-500"
-                      }`}
-                      aria-label={`Go to image ${index + 1}`}
-                    />
-                  ))}
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            <AnimatedElement direction="up" index={0} stagger={0.1}>
+              <div className="bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+                <img
+                  src="/parkly_1.png"
+                  alt="Parkly image 1"
+                  className="w-full h-auto object-cover"
+                />
               </div>
-            </div>
+            </AnimatedElement>
+            <AnimatedElement direction="up" index={1} stagger={0.1}>
+              <div className="bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+                <img
+                  src="/parkly_2.png"
+                  alt="Parkly image 2"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement direction="up" index={2} stagger={0.1}>
+              <div className="bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+                <img
+                  src="/parkly_3.png"
+                  alt="Parkly image 3"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </AnimatedElement>
           </div>
         </AnimatedSection>
       </section>
