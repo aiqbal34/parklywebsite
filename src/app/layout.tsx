@@ -13,15 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parkly - Your Friendly neighborhood parking spot!",
+  title: "Parkly",
   description: "An easier and cheaper alternative to parking whilst making some easy cash",
-  icons: {
-    icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/favicon-32x32.png",
-  },
 };
 // Force redeploy
 

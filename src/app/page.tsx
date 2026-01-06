@@ -2,14 +2,10 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedElement from "@/components/AnimatedElement";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 // Updated for Parkly
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-
   // Video refs for autoplay on scroll
   const parkerVideoRef = useRef<HTMLVideoElement>(null);
   const peterVideoRef = useRef<HTMLVideoElement>(null);
@@ -67,36 +63,6 @@ export default function Home() {
     }),
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setMessage("");
-
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus("success");
-        setMessage("Thank you! We'll send you a download link soon.");
-        setEmail("");
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      setStatus("error");
-      setMessage("Failed to submit. Please try again.");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black">
       {/* Header */}
@@ -109,11 +75,11 @@ export default function Home() {
                 alt="Parkly Logo" 
                 className="h-10 w-auto"
               />
-              <div className="text-3xl font-bold text-white">Parkly</div>
+              <div className="text-3xl font-bold text-white -ml-1">Parkly</div>
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#about" className="text-white hover:text-blue-500 transition-colors">About Us</a>
-              <a href="#demo" className="text-white hover:text-blue-500 transition-colors">Demo</a>
+              <a href="#app-view" className="text-white hover:text-blue-500 transition-colors">App View</a>
               <a href="#contact" className="text-white hover:text-blue-500 transition-colors">Contact</a>
             </div>
             <a href="#download" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition-colors">
@@ -129,7 +95,7 @@ export default function Home() {
           {/* Title and Content */}
           <AnimatedSection direction="up" className="space-y-6 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Your Friendly Neighborhood Parking Spot!
+              Your Friendly Neighborhood Parking
             </h1>
             <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               An easier and cheaper alternative to parking while making some easy cash
@@ -140,7 +106,7 @@ export default function Home() {
           <AnimatedSection direction="up" delay={0.2} className="relative">
             <div className="bg-blue-950 rounded-3xl p-4 sm:p-8">
               <div className="flex items-center justify-center">
-                <div className="relative w-full max-w-4xl">
+                <div className="relative w-full max-w-4xl lg:max-w-7xl">
                   <div className="bg-gray-900 rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden">
                     <video
                       ref={parkerVideoRef}
@@ -166,11 +132,11 @@ export default function Home() {
         <AnimatedSection direction="up" className="relative">
           <div className="bg-blue-950 rounded-3xl p-4 sm:p-8">
             <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-4xl">
+              <div className="relative w-full max-w-4xl lg:max-w-7xl">
                 <div className="bg-gray-900 rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden">
                   <video
                     ref={peterVideoRef}
-                    src="/peter_pov.MOV"
+                    src="/peter_pov.mov"
                     controls
                     className="w-full h-auto max-h-[70vh] rounded-2xl object-contain"
                     playsInline
@@ -182,7 +148,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         </AnimatedSection>
       </section>
 
@@ -191,11 +157,30 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <AnimatedElement direction="pop" index={0} stagger={0.15}>
             <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
-              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-96 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
-                  Practical
-                </h3>
+                <div className="relative z-10">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                    Save money, Make Money
+                  </h3>
+                  <ul className="space-y-3 mb-4">
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Rent from people just like you and save money</span>
+                    </li>
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Homeowners, rent out driveway for easy money</span>
+                    </li>
+                  </ul>
+                  </div>
+                <div className="relative z-10 mt-4 flex-shrink-0">
+                  <img 
+                    src="/save_make.jpg" 
+                    alt="Save money, Make Money" 
+                    className="w-full h-auto max-h-56 object-contain rounded-lg"
+                  />
+                </div>
                 <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </div>
@@ -203,23 +188,61 @@ export default function Home() {
 
           <AnimatedElement direction="pop" index={1} stagger={0.15}>
             <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
-              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-96 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
-                  Convenient
-                </h3>
+                <div className="relative z-10">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                    Save Time
+                  </h3>
+                  <ul className="space-y-3 mb-4">
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Prebook your parking nearby</span>
+                    </li>
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Don't waste time driving around searching parking</span>
+                    </li>
+                  </ul>
+                  </div>
+                <div className="relative z-10 mt-4 flex-shrink-0">
+                  <img 
+                    src="/save_time.jpg" 
+                    alt="Save Time" 
+                    className="w-full h-auto max-h-56 object-contain rounded-lg"
+                  />
+                  </div>
                 <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
+                    </div>
+                  </div>
           </AnimatedElement>
 
           <AnimatedElement direction="pop" index={2} stagger={0.15}>
             <div className="group relative bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-1 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
-              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 h-96 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <h3 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white text-center relative z-10 transform group-hover:scale-110 transition-transform duration-300">
-                  Efficient
-                </h3>
+                <div className="relative z-10">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                    Peace of Mind
+                  </h3>
+                  <ul className="space-y-3 mb-4">
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Short term or long term parking (weekly, monthly)</span>
+                    </li>
+                    <li className="text-gray-300 text-sm md:text-base flex items-start">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span>Know exactly who is parking, secured payments</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="relative z-10 mt-4 flex-shrink-0">
+                  <img 
+                    src="/peace_of_mind.jpg" 
+                    alt="Peace of Mind" 
+                    className="w-full h-auto max-h-56 object-contain rounded-lg"
+                  />
+                </div>
                 <div className="absolute bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </div>
@@ -228,7 +251,7 @@ export default function Home() {
       </section>
 
       {/* Images Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 bg-black">
+      <section id="app-view" className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 bg-black">
         <AnimatedSection direction="up" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             <AnimatedElement direction="up" index={0} stagger={0.1}>
@@ -310,41 +333,38 @@ export default function Home() {
       {/* Download Section */}
       <section id="download" className="bg-blue-500 py-16 lg:py-24">
         <AnimatedSection direction="up" className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Coming Soon
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
+            Download Parkly
           </h2>
-          <p className="text-lg md:text-xl text-blue-50 mb-8 max-w-2xl mx-auto">
-            Enter your email address and we'll send you a download link as soon as the app is ready!
-          </p>
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                disabled={status === "loading"}
-                className="flex-1 px-4 py-3 rounded-lg border-2 border-white bg-white/90 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:bg-white w-full disabled:opacity-50"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors whitespace-nowrap w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {status === "loading" ? "Sending..." : "Send"}
-              </button>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            {/* App Store Button */}
+            <a
+              href="https://apps.apple.com/us/app/useparkly/id6753904145"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-black text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              <svg className="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-xs leading-tight">Download on the</div>
+                <div className="text-xl leading-tight font-bold">App Store</div>
+              </div>
+            </a>
+
+            {/* Google Play Store Button */}
+            <div className="inline-flex items-center justify-center bg-black text-white px-8 py-4 rounded-xl font-semibold opacity-60 cursor-not-allowed shadow-lg">
+              <svg className="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L6.05,21.34L14.54,12.85L20.16,10.81M16.81,8.88L14.54,11.15L6.05,2.66L20.16,10.81L16.81,8.88Z"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-xs leading-tight">Get it on</div>
+                <div className="text-xl leading-tight font-bold">Google Play</div>
+                <div className="text-xs text-gray-400 mt-1">(Coming Soon!)</div>
+              </div>
             </div>
-            {message && (
-              <p
-                className={`mt-4 text-center text-sm ${
-                  status === "success" ? "text-green-200" : "text-red-200"
-                }`}
-              >
-                {message}
-              </p>
-            )}
-          </form>
+          </div>
         </AnimatedSection>
       </section>
 
