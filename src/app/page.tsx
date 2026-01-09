@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 
 export default function Home() {
   // Video refs for autoplay on scroll
+  const dualPerspectiveVideoRef = useRef<HTMLVideoElement>(null);
   const parkerVideoRef = useRef<HTMLVideoElement>(null);
   const peterVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -34,6 +35,9 @@ export default function Home() {
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
+    if (dualPerspectiveVideoRef.current) {
+      observer.observe(dualPerspectiveVideoRef.current);
+    }
     if (parkerVideoRef.current) {
       observer.observe(parkerVideoRef.current);
     }
@@ -100,6 +104,29 @@ export default function Home() {
             <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               An easier and cheaper alternative to parking while making some easy cash
             </p>
+          </AnimatedSection>
+
+          {/* Dual Perspective Video */}
+          <AnimatedSection direction="up" delay={0.1} className="relative">
+            <div className="bg-blue-950 rounded-3xl p-4 sm:p-8">
+              <div className="flex items-center justify-center">
+                <div className="relative w-full max-w-4xl lg:max-w-7xl">
+                  <div className="bg-gray-900 rounded-3xl shadow-2xl p-2 sm:p-4 overflow-hidden">
+                    <video
+                      ref={dualPerspectiveVideoRef}
+                      src="/dual_perspective.mov"
+                      controls
+                      className="w-full h-auto max-h-[70vh] rounded-2xl object-contain"
+                      playsInline
+                      muted
+                      loop
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
           </AnimatedSection>
 
           {/* Hero Video - Parker POV */}
